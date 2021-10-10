@@ -19,7 +19,6 @@ exports.up = async function (knex) {
       .onDelete("CASCADE")
       .onUpdate("CASCADE");
     tbl.string("status").notNullable();
-    tbl.boolean("paid").defaultTo("false");
     tbl.float("tax");
     tbl.string("notes");
     tbl.string("billing_city").notNullable();

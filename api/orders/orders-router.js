@@ -17,14 +17,25 @@ const calculateOrderAmount = (items) => {
   return 50;
 };
 
-router.post("/stripe-payment", async (req, rex, next) => {
-  const { items } = req.body;
+router.post("/payment", async (req, res, next) => {
+  let { amount, id } = req.body;
   try {
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: calculateOrderAmount(items),
-      currency: "usd",
+    const payment = await stripe.paymentIntents.create({
+      amount,
+      currency: "USD",
+      description: "soap item",
+      payment_method: id,
+      confirm: true,
+      metadata: {
+        name: "Barry Wells",
+      },
+      // customer: "Barry Mills",
     });
-    res.status(200).json({ clientSecret: paymentIntent.client_secret });
+    console.log("Payment", payment);
+    res.status(200).json({
+      message: "payment successful",
+      success: true,
+    });
   } catch (err) {
     next(err);
   }
