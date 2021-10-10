@@ -10,11 +10,6 @@ const orders = [
     shipping_apartment: null,
     shipping_id: 1,
     status: "Active",
-    billing_city: "Matawan",
-    billing_state: "NJ",
-    billing_address: "14 Bramble Lane",
-    billing_zip: "07747",
-    billing_apartment: null,
   },
   {
     first_name: "Sarah",
@@ -27,11 +22,6 @@ const orders = [
     shipping_apartment: "2B",
     shipping_id: 2,
     status: "Completed",
-    billing_city: "Whippany",
-    billing_state: "NJ",
-    billing_address: "24 Kearney Ave",
-    billing_zip: "07981",
-    billing_apartment: null,
   },
 ];
 

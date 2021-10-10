@@ -21,11 +21,6 @@ exports.up = async function (knex) {
     tbl.string("status").notNullable();
     tbl.float("tax");
     tbl.string("notes");
-    tbl.string("billing_city").notNullable();
-    tbl.string("billing_state").notNullable();
-    tbl.string("billing_address").notNullable();
-    tbl.string("billing_zip").notNullable();
-    tbl.string("billing_apartment");
   });
 };
 
