@@ -27,3 +27,14 @@ describe("[GET] /api/orders", () => {
     expect(response.status).toBe(200);
   });
 });
+
+describe("[GET] /api/orders/shipping-options", () => {
+  test("returns 3 options", async () => {
+    const response = await request(server).get("/api/orders/shipping-options");
+    expect(response.body).toHaveLength(3);
+  });
+  test("returns status 200", async () => {
+    const response = await request(server).get("/api/orders/shipping-options");
+    expect(response.status).toBe(200);
+  });
+});

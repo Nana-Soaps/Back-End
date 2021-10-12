@@ -24,4 +24,9 @@ const getOrders = async () => {
   return orders;
 };
 
-module.exports = { getOrders };
+const getShippingOptions = async () => {
+  const options = await db("shipping_options");
+  return options;
+};
+
+module.exports = { getOrders, getShippingOptions };

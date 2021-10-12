@@ -31,3 +31,16 @@ describe("getOrders", () => {
     expect(response[0].products[0]).toHaveProperty("info");
   });
 });
+
+describe("getShippingOptions", () => {
+  test("returns 3 shipping options", async () => {
+    const response = await Orders.getShippingOptions();
+    expect(response).toHaveLength(3);
+  });
+  test("each option has the correct properties", async () => {
+    const response = await Orders.getShippingOptions();
+    expect(response[2]).toHaveProperty("shipping_name");
+    expect(response[2]).toHaveProperty("shipping_id");
+    expect(response[2]).toHaveProperty("cost");
+  });
+});

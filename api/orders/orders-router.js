@@ -13,10 +13,6 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-const calculateOrderAmount = (items) => {
-  return 50;
-};
-
 router.post("/payment", async (req, res, next) => {
   let { amount, id } = req.body;
   try {
@@ -29,7 +25,6 @@ router.post("/payment", async (req, res, next) => {
       metadata: {
         name: "Barry Wells",
       },
-      // customer: "Barry Mills",
     });
     console.log("Payment", payment);
     res.status(200).json({
@@ -41,4 +36,12 @@ router.post("/payment", async (req, res, next) => {
   }
 });
 
+router.get("/shipping-options", async (req, res, next) => {
+  try {
+    const options = await Orders.getShippingOptions();
+    res.status(200).json(options);
+  } catch (err) {
+    next(err);
+  }
+});
 module.exports = router;
