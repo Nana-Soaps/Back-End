@@ -2,6 +2,7 @@ exports.up = async function (knex) {
   await knex.schema.createTable("shipping_options", (tbl) => {
     tbl.increments("shipping_id");
     tbl.string("shipping_name").notNullable();
+    tbl.string("shipping_description");
     tbl.float("cost").unsigned().notNullable();
   });
 };
