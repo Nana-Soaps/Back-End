@@ -23,7 +23,7 @@ router.post("/payment", async (req, res, next) => {
       payment_method: id,
       confirm: true,
       metadata: {
-        name: "Barry Wells",
+        ...req.body,
       },
     });
     console.log("Payment", payment);
