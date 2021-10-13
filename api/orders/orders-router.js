@@ -14,12 +14,12 @@ router.get("/", async (req, res, next) => {
 });
 
 router.post("/payment", async (req, res, next) => {
-  let { amount, id } = req.body;
+  let { amount, id, first_name, last_name } = req.body;
   try {
     const payment = await stripe.paymentIntents.create({
       amount,
       currency: "USD",
-      description: "soap item",
+      description: `${first_name} ${last_name}`,
       payment_method: id,
       confirm: true,
       metadata: {
