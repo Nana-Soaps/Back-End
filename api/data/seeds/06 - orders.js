@@ -10,6 +10,7 @@ const orders = [
     shipping_apartment: null,
     shipping_id: 1,
     status: "Active",
+    tax_rate: 7.0,
   },
   {
     first_name: "Sarah",
@@ -22,6 +23,7 @@ const orders = [
     shipping_apartment: "2B",
     shipping_id: 2,
     status: "Completed",
+    tax_rate: 7.0,
   },
 ];
 

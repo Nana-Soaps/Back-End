@@ -19,7 +19,7 @@ exports.up = async function (knex) {
       .onDelete("CASCADE")
       .onUpdate("CASCADE");
     tbl.string("status").notNullable();
-    tbl.float("tax");
+    tbl.float("tax_rate");
     tbl.string("notes");
   });
 };
