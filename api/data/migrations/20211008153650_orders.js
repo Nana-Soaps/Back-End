@@ -10,6 +10,7 @@ exports.up = async function (knex) {
     tbl.string("shipping_address").notNullable();
     tbl.string("shipping_zip").notNullable();
     tbl.string("shipping_apartment");
+    tbl.string("shipping_country");
     tbl
       .integer("shipping_id")
       .unsigned()
