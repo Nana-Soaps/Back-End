@@ -26,7 +26,7 @@ const getOrders = async () => {
 
 const postOrder = async (order) => {
   const newOrder = await db("orders").insert(order);
-  return await db("orders");
+  return newOrder;
 };
 
 const getShippingOptions = async () => {
