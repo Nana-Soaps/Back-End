@@ -14,7 +14,7 @@ router.get("/", async (req, res, next) => {
 });
 
 router.post("/", async (req, res, next) => {
-  const order = req.body;
+  const { order } = req.body;
   try {
     const newOrder = await Orders.postOrder(order);
     res.status(200).json(newOrder);
