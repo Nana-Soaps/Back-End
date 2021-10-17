@@ -1,7 +1,7 @@
 const express = require("express");
 const Orders = require("./orders-model");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-
+const { checkOrder, checkBag } = require("./orders-middleware");
 const router = express.Router();
 
 router.get("/", async (req, res, next) => {
@@ -13,11 +13,11 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.post("/", async (req, res, next) => {
-  const { order } = req.body;
+router.post("/", checkOrder, checkBag, async (req, res, next) => {
+  const { order, bag } = req.body;
   try {
-    const newOrder = await Orders.postOrder(order);
-    res.status(200).json(newOrder);
+    const newOrder = await Orders.postOrder(order, bag);
+    res.status(201).json(newOrder);
   } catch (err) {
     next(err);
   }

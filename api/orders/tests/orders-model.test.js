@@ -44,3 +44,133 @@ describe("getShippingOptions", () => {
     expect(response[2]).toHaveProperty("cost");
   });
 });
+
+describe("postOrder", () => {
+  test("adds new entry to orders table", async () => {
+    const testOrder = {
+      first_name: "John",
+      last_name: "Smith",
+      email: "jsmith@gmail.com",
+      shipping_city: "Boston",
+      shipping_state: "MA",
+      shipping_address: "12 College Street",
+      shipping_zip: "09821",
+      shipping_apartment: "",
+      shipping_id: 1,
+      status: "active",
+      tax_rate: 7.0,
+      notes: "Leave in Back",
+    };
+    const testBag = [
+      {
+        product_id: 1,
+        quantity: 2,
+        soldFor: 8,
+      },
+      {
+        product_id: 2,
+        quantity: 2,
+        soldFor: 8,
+      },
+    ];
+
+    await Orders.postOrder(testOrder, testBag);
+    const allOrders = await db("orders");
+    expect(allOrders).toHaveLength(3);
+  });
+  test("adds 2 new entries to orders_products table", async () => {
+    const testOrder = {
+      first_name: "John",
+      last_name: "Smith",
+      email: "jsmith@gmail.com",
+      shipping_city: "Boston",
+      shipping_state: "MA",
+      shipping_address: "12 College Street",
+      shipping_zip: "09821",
+      shipping_apartment: "",
+      shipping_id: 1,
+      status: "active",
+      tax_rate: 7.0,
+      notes: "Leave in Back",
+    };
+    const testBag = [
+      {
+        product_id: 1,
+        quantity: 2,
+        soldFor: 8,
+      },
+      {
+        product_id: 2,
+        quantity: 2,
+        soldFor: 8,
+      },
+    ];
+
+    await Orders.postOrder(testOrder, testBag);
+    const allOrderProducts = await db("orders_products");
+    expect(allOrderProducts).toHaveLength(7);
+  });
+  test("new order_products entry has correct order_id", async () => {
+    const testOrder = {
+      first_name: "John",
+      last_name: "Smith",
+      email: "jsmith@gmail.com",
+      shipping_city: "Boston",
+      shipping_state: "MA",
+      shipping_address: "12 College Street",
+      shipping_zip: "09821",
+      shipping_apartment: "",
+      shipping_id: 1,
+      status: "active",
+      tax_rate: 7.0,
+      notes: "Leave in Back",
+    };
+    const testBag = [
+      {
+        product_id: 1,
+        quantity: 2,
+        soldFor: 8,
+      },
+      {
+        product_id: 2,
+        quantity: 2,
+        soldFor: 8,
+      },
+    ];
+
+    await Orders.postOrder(testOrder, testBag);
+    const allOrderProducts = await db("orders_products");
+    expect(allOrderProducts[6].order_id).toBe(3);
+  });
+  test("returns newOrder id", async () => {
+    const testOrder = {
+      first_name: "John",
+      last_name: "Smith",
+      email: "jsmith@gmail.com",
+      shipping_city: "Boston",
+      shipping_state: "MA",
+      shipping_address: "12 College Street",
+      shipping_zip: "09821",
+      shipping_apartment: "",
+      shipping_id: 1,
+      status: "active",
+      tax_rate: 7.0,
+      notes: "Leave in Back",
+    };
+    const testBag = [
+      {
+        product_id: 1,
+        quantity: 2,
+        soldFor: 8,
+      },
+      {
+        product_id: 2,
+        quantity: 2,
+        soldFor: 8,
+      },
+    ];
+
+    const response = await Orders.postOrder(testOrder, testBag);
+    expect(response).toBe(3);
+  });
+});

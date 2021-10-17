@@ -24,9 +24,13 @@ const getOrders = async () => {
   return orders;
 };
 
-const postOrder = async (order) => {
-  const newOrder = await db("orders").insert(order);
-  return newOrder;
+const postOrder = async (order, bag) => {
+  const newOrder = await db("orders").insert(order, "order_id");
+  const bagToInsert = bag.map((prod) => {
+    return { ...prod, order_id: newOrder[0] };
+  });
+  await db("orders_products").insert(bagToInsert);
+  return newOrder[0];
 };
 
 const getShippingOptions = async () => {
