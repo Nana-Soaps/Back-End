@@ -4,6 +4,7 @@ const getOrders = async () => {
   const orders = await db("orders");
   const products = await db("orders_products");
   const product_info = await db("products");
+  const shipping_options = await db("shipping_options");
 
   products.forEach((product) => {
     product.total = product.quantity * product.soldFor;
@@ -14,6 +15,9 @@ const getOrders = async () => {
 
   orders.forEach((order) => {
     order.subtotal = 0;
+    order.shipping = shipping_options.find((option) => {
+      return option.shipping_id == order.shipping_id;
+    });
     order.products = products.filter((product) => {
       return product.order_id === order.order_id;
     });

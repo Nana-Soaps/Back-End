@@ -30,6 +30,11 @@ describe("getOrders", () => {
     const response = await Orders.getOrders();
     expect(response[0].products[0]).toHaveProperty("info");
   });
+  test("orders have shipping property with shipping cost", async () => {
+    const response = await Orders.getOrders();
+    expect(response[0]).toHaveProperty("shipping");
+    expect(response[0].shipping).toHaveProperty("cost");
+  });
 });
 
 describe("getShippingOptions", () => {
