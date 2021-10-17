@@ -37,9 +37,15 @@ const postOrder = async (order, bag) => {
   return newOrder[0];
 };
 
+const updateOrder = async (order_id, updates) => {
+  await db("orders").where("order_id", order_id).update(updates);
+  const allOrders = getOrders();
+  return allOrders;
+};
+
 const getShippingOptions = async () => {
   const options = await db("shipping_options");
   return options;
 };
 
-module.exports = { getOrders, getShippingOptions, postOrder };
+module.exports = { getOrders, getShippingOptions, postOrder, updateOrder };

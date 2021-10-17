@@ -1,3 +1,5 @@
+const db = require("../data/db-config");
+
 const checkOrder = (req, res, next) => {
   const { order } = req.body;
   const {
@@ -47,4 +49,18 @@ const checkBag = (req, res, next) => {
   }
 };
 
-module.exports = { checkOrder, checkBag };
+const checkIdExists = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const order = await db("orders").where("order_id", id).first();
+    if (order) {
+      next();
+    } else {
+      next({ status: 404, message: `Order id ${id} does not exist` });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { checkOrder, checkBag, checkIdExists };

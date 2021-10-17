@@ -152,3 +152,30 @@ describe("[POST] /api/orders", () => {
     expect(response.body.message).toBe("No items in bag");
   });
 });
+
+describe("[PUT] /api/orders/:id", () => {
+  test("updates order id", async () => {
+    await request(server).put("/api/orders/1").send({ status: "Cancelled" });
+    const updatedOrder = await db("orders").where("order_id", 1).first();
+    expect(updatedOrder.order_id).toBe(1);
+    expect(updatedOrder.status).toBe("Cancelled");
+  });
+  test("returns status 200", async () => {
+    const response = await request(server)
+      .put("/api/orders/1")
+      .send({ status: "Cancelled" });
+    expect(response.status).toBe(200);
+  });
+  test("returns all orders", async () => {
+    const response = await request(server)
+      .put("/api/orders/1")
+      .send({ status: "Cancelled" });
+    expect(response.body).toHaveLength(2);
+  });
+  test("returns 404 in invalid ID", async () => {
+    const response = await request(server)
+      .put("/api/orders/99")
+      .send({ status: "Cancelled" });
+    expect(response.status).toBe(404);
+  });
+});

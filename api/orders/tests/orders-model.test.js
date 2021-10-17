@@ -179,3 +179,16 @@ describe("postOrder", () => {
     expect(response).toBe(3);
   });
 });
+
+describe("updateOrder", () => {
+  test("updates an order status", async () => {
+    await Orders.updateOrder(1, { status: "Cancelled" });
+    const order = await db("orders").where("order_id", 1).first();
+    expect(order.order_id).toBe(1);
+    expect(order.status).toBe("Cancelled");
+  });
+  test("returns all orders", async () => {
+    const response = await Orders.updateOrder(1, { status: "Cancelled" });
+    expect(response).toHaveLength(2);
+  });
+});
