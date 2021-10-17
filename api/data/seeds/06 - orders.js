@@ -11,7 +11,7 @@ const orders = [
     shipping_id: 1,
     shipping_country: "United States",
     status: "Active",
-    tax_rate: 1.07,
+    tax_rate: 0.07,
   },
   {
     first_name: "Sarah",
@@ -25,7 +25,7 @@ const orders = [
     shipping_id: 2,
     shipping_country: "United States",
     status: "Completed",
-    tax_rate: 1.07,
+    tax_rate: 0.07,
   },
 ];
 
