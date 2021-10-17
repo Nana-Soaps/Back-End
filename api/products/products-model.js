@@ -21,6 +21,7 @@ const getAllCategories = async () => {
     prod.images = images.filter((img) => img.product_id === prod.product_id);
     prod.quantitySold = quantitySold;
     prod.sales = sales;
+
     delete prod.orders;
     prod.images.forEach((img) => {
       delete img.product_id;
@@ -30,6 +31,9 @@ const getAllCategories = async () => {
     category.products = products.filter(
       (prod) => prod.category === category.category_id
     );
+    category.products.forEach((prod) => {
+      prod.category_name = category.category_name;
+    });
   });
   return categories;
 };
