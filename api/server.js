@@ -7,7 +7,7 @@ const ordersRouter = require("./orders/orders-router");
 const emailsRouter = require("./emails/emails-router");
 
 const corsOptions = {
-  origin: "*",
+  origin: "http://localhost:3000",
   credentials: true,
   optionSuccessStatus: 200,
 };
