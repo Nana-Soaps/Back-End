@@ -1,6 +1,7 @@
 const express = require("express");
 const helmet = require("helmet");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 const productsRouter = require("./products/products-router");
 const ordersRouter = require("./orders/orders-router");
 const emailsRouter = require("./emails/emails-router");
