@@ -1,14 +1,20 @@
 const express = require("express");
 const helmet = require("helmet");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 const productsRouter = require("./products/products-router");
 const ordersRouter = require("./orders/orders-router");
 const emailsRouter = require("./emails/emails-router");
 
+const corsOptions = {
+  origin: "http://localhost:3001",
+  credentials: true,
+  optionSuccessStatus: 200,
+};
 const server = express();
 server.use(express.json());
 server.use(helmet());
-server.use(cors());
+server.use(cors(corsOptions));
 
 server.use("/api/products", productsRouter);
 server.use("/api/orders", ordersRouter);
