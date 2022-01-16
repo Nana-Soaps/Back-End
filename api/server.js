@@ -18,7 +18,7 @@ server.use(cors(corsOptions));
 
 server.use("/api/products", productsRouter);
 server.use("/api/orders", ordersRouter);
-server.use("/api/emails", emailsRouter);
+// server.use("/api/emails", emailsRouter);
 
 server.use((err, req, res, next) => {
   res.status(err.status || 500).json({
