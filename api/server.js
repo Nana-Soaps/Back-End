@@ -6,15 +6,10 @@ const productsRouter = require("./products/products-router");
 const ordersRouter = require("./orders/orders-router");
 const emailsRouter = require("./emails/emails-router");
 
-const whitelist = ["http://localhost:3000/", "http://www.otherexample.com"];
 const corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed"));
-    }
-  },
+  origin: "*",
+  credentials: true,
+  optionSuccessStatus: 200,
 };
 const server = express();
 server.use(express.json());
