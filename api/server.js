@@ -6,10 +6,15 @@ const productsRouter = require("./products/products-router");
 const ordersRouter = require("./orders/orders-router");
 const emailsRouter = require("./emails/emails-router");
 
+const whitelist = ["http://localhost:3000/", "http://www.otherexample.com"];
 const corsOptions = {
-  origin: "*",
-  credentials: true,
-  optionSuccessStatus: 200,
+  origin: function (origin, callback) {
+    if (whitelist.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed"));
+    }
+  },
 };
 const server = express();
 server.use(express.json());
@@ -24,6 +29,7 @@ server.use((err, req, res, next) => {
   res.status(err.status || 500).json({
     message: err.message,
   });
+  I;
 });
 
 module.exports = server;
