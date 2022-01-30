@@ -28,6 +28,18 @@ describe("[GET] /api/orders", () => {
   });
 });
 
+describe("[GET] /api/orders/:id", () => {
+  test("returns the correct order", async () => {
+    const response = await request(server).get("/api/orders/2");
+    expect(response.body.order_id).toBe(2);
+  });
+
+  test("returns status 200", async () => {
+    const response = await request(server).get("/api/orders/1");
+    expect(response.status).toBe(200);
+  });
+});
+
 describe("[GET] /api/orders/shipping-options", () => {
   test("returns 3 options", async () => {
     const response = await request(server).get("/api/orders/shipping-options");
