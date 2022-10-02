@@ -1,0 +1,25 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo installing node...
+      - curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
+      - sudo apt-get install -y nodejs
+      - echo NODE VERSION
+      - node -v
+      - echo installing yarn...
+      - corepack enable
+  pre_build:
+    commands:
+      - echo installing dependencies...
+      - yarn install
+  build:
+    commands:
+      # - yarn test
+      # - yarn build
+artifacts:
+  files:
+    - "**/*"
+  discard-paths: no
+  base-directory: src
