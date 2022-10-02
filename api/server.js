@@ -1,9 +1,9 @@
 const express = require("express");
-// const helmet = require("helmet");
+const helmet = require("helmet");
 const cors = require("cors");
 // const bodyParser = require("body-parser");
-// const productsRouter = require("./products/products-router");
-// const ordersRouter = require("./orders/orders-router");
+const productsRouter = require("./products/products-router");
+const ordersRouter = require("./orders/orders-router");
 // const emailsRouter = require("./emails/emails-router");
 
 const corsOptions = {
@@ -13,11 +13,11 @@ const corsOptions = {
 };
 const server = express();
 server.use(express.json());
-// server.use(helmet());
+server.use(helmet());
 server.use(cors(corsOptions));
 
-// server.use("/api/products", productsRouter);
-// server.use("/api/orders", ordersRouter);
+server.use("/api/products", productsRouter);
+server.use("/api/orders", ordersRouter);
 
 server.use("/", (req, res) => {
   res.status(200).json({ message: "welcome to the api" });
