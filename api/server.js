@@ -4,19 +4,25 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const productsRouter = require("./products/products-router");
 const ordersRouter = require("./orders/orders-router");
+const emailsRouter = require("./emails/emails-router");
 
+const corsOptions = {
+  origin: "*",
+  credentials: true,
+  optionSuccessStatus: 200,
+};
 const server = express();
 server.use(express.json());
-// server.use(bodyParser.urlencoded({ extended: true }));
 server.use(helmet());
-server.use(cors());
+server.use(cors(corsOptions));
 
 server.use("/api/products", productsRouter);
 server.use("/api/orders", ordersRouter);
 
-// server.use("/", (req, res) => {
-//   res.status(200).json({ message: "welcome to the api" });
-// });
+server.use("/", (req, res) => {
+  res.status(200).json({ message: "welcome to the api" });
+});
+
 
 server.use((err, req, res, next) => {
   res.status(err.status || 500).json({
