@@ -37,6 +37,19 @@ describe("getOrders", () => {
   });
 });
 
+describe("getOrderById", () => {
+  test("returns correct order", async () => {
+    const response = await Orders.getOrderById(2);
+    expect(response.order_id).toBe(2);
+  });
+
+  test("contains the products of that order", async () => {
+    const response = await Orders.getOrderById(1);
+    expect(response).toHaveProperty("products");
+    expect(response.products).toHaveLength(2);
+  });
+});
+
 describe("getShippingOptions", () => {
   test("returns 3 shipping options", async () => {
     const response = await Orders.getShippingOptions();

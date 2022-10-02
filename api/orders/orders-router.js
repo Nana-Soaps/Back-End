@@ -13,6 +13,25 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.get("/shipping-options", async (req, res, next) => {
+  try {
+    const options = await Orders.getShippingOptions();
+    res.status(200).json(options);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get("/:id", async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const order = await Orders.getOrderById(id);
+    res.status(200).json(order);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.post("/", checkOrder, checkBag, async (req, res, next) => {
   const { order, bag } = req.body;
   try {
@@ -56,12 +75,4 @@ router.post("/payment", async (req, res, next) => {
   }
 });
 
-router.get("/shipping-options", async (req, res, next) => {
-  try {
-    const options = await Orders.getShippingOptions();
-    res.status(200).json(options);
-  } catch (err) {
-    next(err);
-  }
-});
 module.exports = router;

@@ -28,6 +28,12 @@ const getOrders = async () => {
   return orders;
 };
 
+const getOrderById = async (id) => {
+  const orders = await getOrders();
+  const order = orders.find((cur) => cur.order_id == id);
+  return order;
+};
+
 const postOrder = async (order, bag) => {
   const newOrder = await db("orders").insert(order, "order_id");
   const bagToInsert = bag.map((prod) => {
@@ -48,4 +54,10 @@ const getShippingOptions = async () => {
   return options;
 };
 
-module.exports = { getOrders, getShippingOptions, postOrder, updateOrder };
+module.exports = {
+  getOrders,
+  getShippingOptions,
+  postOrder,
+  updateOrder,
+  getOrderById,
+};
