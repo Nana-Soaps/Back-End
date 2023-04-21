@@ -9,10 +9,6 @@
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
     "seed": "knex seed:run",
-    "migrateh": "heroku run knex migrate:latest -a nanasoapsbackend",
-    "rollbackh": "heroku run knex migrate:rollback -a nanasoapsbackend",
-    "databaseh": "heroku pg:psql -a nanasoapsbackend",
-    "seedh": "heroku run knex seed:run -a nanasoapsbackend",
     "test": "cross-env NODE_ENV=testing jest --watchAll --verbose --runInBand",
     "deploy": "git push heroku master"
   },
